@@ -138,7 +138,7 @@ def sign_req(req):
     cert = crypto.X509()
     cert.set_serial_number(serial)
     cert.gmtime_adj_notBefore(0)
-    cert.gmtime_adj_notAfter(365 * 24 * 60 * 60)
+    cert.gmtime_adj_notAfter(31536000)
     cert.set_issuer(ca_cert.get_subject())
     cert.set_subject(req.get_subject())
     cert.set_pubkey(req.get_pubkey())

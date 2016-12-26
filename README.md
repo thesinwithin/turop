@@ -1,2 +1,2 @@
 # turop
-Turop - An anonymous CA
+A quick and very dirty CA

@@ -151,8 +151,11 @@ def show_form():
 
 @app.route('/', method='POST')
 def process_form():
-    cert = sign_req(req=crypto.load_certificate_request(crypto.FILETYPE_PEM, request.forms.get('csr_form_field')))
-    response.add_header('Content-type', 'text/plain')
-    return tpl_reponse.render(generated_cert=crypto.dump_certificate(crypto.FILETYPE_PEM, cert), intermediate_ca=ca_cert_key)
+    try:
+        cert = sign_req(req=crypto.load_certificate_request(crypto.FILETYPE_PEM, request.forms.get('csr_form_field')))
+        response.add_header('Content-type', 'text/plain')
+        return tpl_reponse.render(generated_cert=crypto.dump_certificate(crypto.FILETYPE_PEM, cert), intermediate_ca=ca_cert_key)
+    except:
+        return "Invalid CSR"
 
 run(app, host='0.0.0.0', port=8080)
